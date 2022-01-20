@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "FiguresLibrary\Library.csproj", "{2BCA6224-C220-4A39-A5E8-6E1F7A47D1C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UiLibrary", "FiguresLibrary\UiLibrary.csproj", "{2BCA6224-C220-4A39-A5E8-6E1F7A47D1C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopUI", "DesktopUI\DesktopUI.csproj", "{DBD9B832-1B03-4120-8CAD-E46C2482E704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfThemes", "WpfThemes\WpfThemes.csproj", "{66CAF882-7ECC-409C-9820-FF3CE7A8C22D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfThemes", "WpfThemes\WpfThemes.csproj", "{66CAF882-7ECC-409C-9820-FF3CE7A8C22D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

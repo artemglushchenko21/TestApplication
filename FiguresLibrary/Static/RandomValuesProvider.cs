@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace FiguresLibrary.Static
+namespace UiLibrary.Static
 {
     public static class RandomValuesProvider
     {

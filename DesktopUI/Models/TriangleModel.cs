@@ -1,4 +1,4 @@
-﻿using FiguresLibrary.Static;
+﻿using UiLibrary.Static;
 using System;
 using System.Collections.Generic;
 using System.Linq;

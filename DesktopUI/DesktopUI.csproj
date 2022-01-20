@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FiguresLibrary\Library.csproj" />
+    <ProjectReference Include="..\FiguresLibrary\UiLibrary.csproj" />
     <ProjectReference Include="..\WpfThemes\WpfThemes.csproj" />
   </ItemGroup>
 
