@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 
 namespace DesktopUI.Models
 {
+
    public class TriangleModel : AbstractFigure
     {
         private readonly string figureName = "Triangle";
