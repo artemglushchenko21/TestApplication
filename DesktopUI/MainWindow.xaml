@@ -1,0 +1,73 @@
+﻿<Window x:Class="DesktopUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="1" Grid.Column="1" Background="#d4d6d9" MinHeight="40"></DockPanel>
+        <TreeView x:Name="BrowserTree" Grid.Row="2" Grid.Column="1" MinWidth="150" HorizontalAlignment="Left" BorderThickness="0" Background="WhiteSmoke" SelectedItemChanged="BrowserTree_SelectedItemChanged">
+
+        </TreeView>
+        <DockPanel Grid.Row="1" Grid.Column="2" Background="#d4d6d9" MinHeight="35">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Button x:Name="AddRectangle" Grid.Column="0" Grid.Row="0"  Click="AddRectangle_Click"  Style="{StaticResource ButtonStyleForFigureAdd}"  BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50" >
+                    <Canvas HorizontalAlignment="Center">
+                        <Rectangle Width="18" Height="18"  Fill="WhiteSmoke" Canvas.Left="-9" Canvas.Top="-9" />
+                    </Canvas>
+                </Button>
+                <Button x:Name="AddCircle"   Grid.Column="1" Grid.Row="0" Click="AddCircle_Click" Style="{StaticResource ButtonStyleForFigureAdd}" BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50">
+                    <Canvas HorizontalAlignment="Center">
+                        <Ellipse Width="20" Height="20" Fill="WhiteSmoke" Canvas.Left="-10" Canvas.Top="-10" />
+                    </Canvas>
+                </Button>
+                <Button x:Name="AddTriangle"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Click="AddTriangle_Click" Style="{StaticResource ButtonStyleForFigureAdd}" BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50" >
+                    <Canvas HorizontalAlignment="Center">
+                        <Polygon Points="0,-10 -10,10, 10,10"  Fill="WhiteSmoke" VerticalAlignment="Center"/>                  
+                    </Canvas>
+                </Button>
+                <Button x:Name="StopFigure"  Grid.Column="5" Grid.Row="0" Click="StopFigure_Click" Style="{StaticResource ButtonStyleForPlayAndStop}" BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50" Opacity="0.2">
+                    <Canvas x:Name="ButtonIcon" HorizontalAlignment="Center">
+                        <Rectangle Width="12" Height="12"  Fill="#344543" Canvas.Left="-6" Canvas.Top="-6" />
+                    </Canvas>
+                </Button>
+                <Button x:Name="MoveFigure"  Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyleForPlayAndStop}" Click="MoveFigure_Click" BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50" Opacity="0.2">
+                    <Canvas HorizontalAlignment="Center">
+                        <Polygon Points="-4,-8 6,0, -4,8"  Fill="#344543" VerticalAlignment="Center"/>
+                    </Canvas>
+                </Button>
+            </Grid>
+            <!--<UniformGrid Columns="3">-->
+
+            <!--</UniformGrid>-->
+        </DockPanel>
+        <Canvas x:Name="DrawingArea" Grid.Row="2" Grid.Column="2" SizeChanged="DrawingArea_SizeChanged">
+        </Canvas>
+        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="6"/>
+    </Grid>
+</Window>
