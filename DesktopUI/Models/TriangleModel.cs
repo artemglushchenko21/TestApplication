@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using DesktopUI.Resources;
 
 namespace DesktopUI.Models
 {
 
    public class TriangleModel : AbstractFigure
     {
-        private readonly string figureName = "Triangle";
         private double maxHeight;
         private double maxWidth;
 
@@ -91,7 +91,7 @@ namespace DesktopUI.Models
         { 
             get 
             { 
-                return figureName; 
+                return GlobalStrings.TriangleDisplayName; 
             } 
         }
 

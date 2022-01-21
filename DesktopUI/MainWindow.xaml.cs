@@ -1,8 +1,10 @@
 ﻿using DesktopUI.Models;
+using DesktopUI.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +25,6 @@ namespace DesktopUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly string pausedPrefix = " (stopped)";
         private PointModel canvasMaxPoint;
         private readonly double opacityOfDisabledButton = 0.2;
         private readonly double opacityOfEnabledButton = 1;
@@ -38,6 +39,30 @@ namespace DesktopUI
             DisableStopButton();
             SetCanvasMaxPoint();
             SetCanvasUpdateLoop();
+        }
+
+        private static List<string> GetAvailableLanguageDisplayNames()
+        {
+            Dictionary<string, string> result = GetAvailableLanguagesDictionary();
+            return result.Values.Select(x => x.Substring(0, 1).ToUpper() + x[1..]).ToList();
+        }
+
+        private static Dictionary<string,string> GetAvailableLanguagesDictionary()
+        {
+            Dictionary<string, string> result = new();
+
+            string languagesStr = Languages.AvailableLanguages;
+            string[] languagesArr = languagesStr.Split(";");
+
+            foreach (var item in languagesArr)
+            {
+                string languageAbbreviation = item.Split(" ")[0];
+                string languageDisplayName = item.Split(" ")[1];
+
+                result[languageAbbreviation] = languageDisplayName;
+            }
+
+            return result;
         }
 
         private void SetCanvasUpdateLoop()
@@ -81,7 +106,6 @@ namespace DesktopUI
             ProcessAddFigure(cirle);
         }
 
-
         private void AddRectangle_Click(object sender, RoutedEventArgs e)
         {
             RectangleModel rectangle = new();
@@ -108,8 +132,8 @@ namespace DesktopUI
         {
             TreeViewItem node = new();
 
-            node.Header = $"{ figure.DisplayName }:{ BrowserTree.Items.Count + 1 }";
-
+            string nodeHeader = GetNodeName(figure.DisplayName, BrowserTree.Items.Count + 1);
+            node.Header = nodeHeader;
             node.Tag = figure;
 
             BrowserTree.Items.Add(node);
@@ -189,17 +213,17 @@ namespace DesktopUI
             treeViewItem.IsSelected = false;
         }
 
-        private void AddPausedPrefixToNodeHeader(TreeViewItem treeViewItem)
+        private static void AddPausedPrefixToNodeHeader(TreeViewItem treeViewItem)
         {
             string currentHeader = treeViewItem.Header.ToString();
-            string updatedHeader = currentHeader.Insert(currentHeader.LastIndexOf(':'), pausedPrefix);
+            string updatedHeader = currentHeader.Insert(currentHeader.LastIndexOf(':'), GlobalStrings.PrefixStopped);
             treeViewItem.Header = updatedHeader;
         }
 
-        private void RemovePrefixFromHeader(TreeViewItem treeViewItem)
+        private static void RemovePrefixFromHeader(TreeViewItem treeViewItem)
         {
             string currentHeader = treeViewItem.Header.ToString();
-            string updatedHeader = currentHeader.Replace(pausedPrefix, "");
+            string updatedHeader = currentHeader.Replace(GlobalStrings.PrefixStopped, "");
             treeViewItem.Header = updatedHeader;
         }
 
@@ -235,6 +259,64 @@ namespace DesktopUI
                     figure.CurrentPosition = currentPosition;
                 }
             }
+        }
+
+        private void ComboboxLanguages_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> languages = GetAvailableLanguageDisplayNames();
+
+            ComboboxLanguages.ItemsSource = languages;
+            ComboboxLanguages.Text = languages[0];
+        }
+
+        private void ComboboxLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string currentLanguage = ComboboxLanguages.SelectedItem.ToString().ToLower();
+            string currentCulture = GetCurrentCultureAbbreviation(currentLanguage);
+
+            SetCurrentCulture(currentCulture);
+            UpdateBrowserNames();
+        }
+
+        private static string GetCurrentCultureAbbreviation(string currentLanguage)
+        {
+            Dictionary<string, string> languageDistionary = GetAvailableLanguagesDictionary();
+            string currentCulture = languageDistionary.FirstOrDefault(x => x.Value == currentLanguage).Key;
+            return currentCulture;
+        }
+
+        private static void SetCurrentCulture(string currentCulture)
+        {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(currentCulture);
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(currentCulture);
+        }
+
+        private void UpdateBrowserNames()
+        {
+            int nodesCounter = 1;
+
+            foreach (TreeViewItem node in BrowserTree.Items)
+            {
+                AbstractFigure figure = (AbstractFigure)node.Tag;
+                node.Tag = figure;
+
+                string header = node.Header.ToString();
+
+                bool pausedPrefixApplied = figure.IsStoped;
+
+                string nodeHeader = GetNodeName(figure.DisplayName, nodesCounter++);
+                node.Header = nodeHeader;
+
+                if (pausedPrefixApplied)
+                {
+                    AddPausedPrefixToNodeHeader(node);
+                }
+            }
+        }
+
+        private static string GetNodeName(string figureDisplayName, int countNumber)
+        {
+            return $"{ figureDisplayName }:{ countNumber }";
         }
     }
 }

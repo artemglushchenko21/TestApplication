@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesktopUI.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,6 @@ namespace DesktopUI.Models
 {
     public class CircleModel : AbstractFigure
     {
-        private readonly string figureName = "Circle";
         private readonly double radius = RandomValuesProvider.GetRandomSize();
 
         public CircleModel()
@@ -86,7 +86,7 @@ namespace DesktopUI.Models
         {
             get
             {
-                return figureName;
+                return GlobalStrings.CircleDisplayName;
             }
         }
     }

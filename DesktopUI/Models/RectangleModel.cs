@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using DesktopUI.Resources;
 
 namespace DesktopUI.Models
 {
    public class RectangleModel : AbstractFigure
     {
-        private readonly string figureName = "Rectangle";
         private readonly double width = RandomValuesProvider.GetRandomSize();
         private readonly double height = RandomValuesProvider.GetRandomSize();
 
@@ -40,7 +40,7 @@ namespace DesktopUI.Models
         { 
             get 
             { 
-                return figureName; 
+                return GlobalStrings.RectangleDisplayName; 
             } 
         }
 

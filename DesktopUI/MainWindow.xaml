@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0" />
@@ -19,10 +19,20 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TreeView x:Name="BrowserTree" Grid.Row="0" Grid.Column="0" MinWidth="180" HorizontalAlignment="Left" BorderThickness="0" Background="WhiteSmoke" SelectedItemChanged="BrowserTree_SelectedItemChanged" Grid.ColumnSpan="2">
+            </TreeView>
+            <ComboBox x:Name="ComboboxLanguages" Loaded="ComboboxLanguages_Loaded" SelectionChanged="ComboboxLanguages_SelectionChanged" Grid.Row="2" MinHeight="20" Padding="5 5" />
+        </Grid>
         <DockPanel Grid.Row="1" Grid.Column="1" Background="#d4d6d9" MinHeight="40"></DockPanel>
-        <TreeView x:Name="BrowserTree" Grid.Row="2" Grid.Column="1" MinWidth="150" HorizontalAlignment="Left" BorderThickness="0" Background="WhiteSmoke" SelectedItemChanged="BrowserTree_SelectedItemChanged">
 
-        </TreeView>
         <DockPanel Grid.Row="1" Grid.Column="2" Background="#d4d6d9" MinHeight="35">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -48,7 +58,7 @@
                 </Button>
                 <Button x:Name="AddTriangle"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Click="AddTriangle_Click" Style="{StaticResource ButtonStyleForFigureAdd}" BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50" >
                     <Canvas HorizontalAlignment="Center">
-                        <Polygon Points="0,-10 -10,10, 10,10"  Fill="WhiteSmoke" VerticalAlignment="Center"/>                  
+                        <Polygon Points="0,-10 -10,10, 10,10"  Fill="WhiteSmoke" VerticalAlignment="Center"/>
                     </Canvas>
                 </Button>
                 <Button x:Name="StopFigure"  Grid.Column="5" Grid.Row="0" Click="StopFigure_Click" Style="{StaticResource ButtonStyleForPlayAndStop}" BorderThickness="0" Cursor="Hand" Margin="5 5" Width="50" Opacity="0.2">
@@ -62,9 +72,6 @@
                     </Canvas>
                 </Button>
             </Grid>
-            <!--<UniformGrid Columns="3">-->
-
-            <!--</UniformGrid>-->
         </DockPanel>
         <Canvas x:Name="DrawingArea" Grid.Row="2" Grid.Column="2" SizeChanged="DrawingArea_SizeChanged">
         </Canvas>

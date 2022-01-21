@@ -11,4 +11,45 @@
     <ProjectReference Include="..\WpfThemes\WpfThemes.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\GlobalStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GlobalStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Languages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Languages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GlobalStrings.resx">
+      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GlobalStrings.ru.resx">
+      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GlobalStrings.en.resx">
+      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Languages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
