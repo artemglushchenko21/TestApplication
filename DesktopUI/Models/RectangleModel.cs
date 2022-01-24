@@ -11,7 +11,8 @@ using DesktopUI.Resources;
 
 namespace DesktopUI.Models
 {
-   public class RectangleModel : AbstractFigure
+    [Serializable]
+    public class RectangleModel : AbstractFigure
     {
         private readonly double width = RandomValuesProvider.GetRandomSize();
         private readonly double height = RandomValuesProvider.GetRandomSize();
@@ -26,14 +27,49 @@ namespace DesktopUI.Models
             SolidColorBrush mySolidColorBrush = new();
             mySolidColorBrush.Color = RandomValuesProvider.GetRandomColor();
 
+            colorRgbValues = (mySolidColorBrush.Color.R, mySolidColorBrush.Color.G, mySolidColorBrush.Color.B);
+
             Rectangle rectangle = new()
             {
-                Width = width,
                 Height = height,
-                Fill = mySolidColorBrush,
+                Width = width,
+                
+                Fill = mySolidColorBrush
             };
 
             _canvasElement = rectangle;
+        }
+
+        private void CreateRectangularShape(double height, double width, (byte R, byte G, byte B) colorRgb)
+        {
+            SolidColorBrush mySolidColorBrush = new();
+            mySolidColorBrush.Color = System.Windows.Media.Color.FromRgb(colorRgb.R, colorRgb.G, colorRgb.B);
+
+            Rectangle rectangle = new()
+            {
+                Height = height,
+                Width = width,
+
+                Fill = mySolidColorBrush
+            };
+
+            _canvasElement = rectangle;
+        }
+
+        public override UIElement CanvasElement
+        {
+            get
+            {
+                if(_canvasElement != null)
+                {
+                    return _canvasElement;
+                }
+
+                CreateRectangularShape(height, width, colorRgbValues);
+              //  CreateRectangleShape();
+
+                return _canvasElement;
+            }
         }
 
         public override string DisplayName 

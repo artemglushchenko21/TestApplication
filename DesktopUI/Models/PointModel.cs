@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DesktopUI.Models
 {
+    [Serializable]
     public struct PointModel
     {
         public PointModel(double posX, double posY)

@@ -1,7 +1,9 @@
 ﻿using DesktopUI.Models;
 using DesktopUI.Resources;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using UiLibrary.Serializers;
 using PointModel = DesktopUI.Models.PointModel;
 
 namespace DesktopUI
@@ -28,7 +31,9 @@ namespace DesktopUI
         private PointModel canvasMaxPoint;
         private readonly double opacityOfDisabledButton = 0.2;
         private readonly double opacityOfEnabledButton = 1;
-        private readonly List<AbstractFigure> figures = new();
+
+        private List<AbstractFigure> figures = new();
+
         private readonly DispatcherTimer timer = new();
 
         public MainWindow()
@@ -78,8 +83,10 @@ namespace DesktopUI
             {
                 figure.Move(canvasMaxPoint);
 
-                Canvas.SetLeft(figure.CanvasElement, figure.CurrentPosition.X);
-                Canvas.SetTop(figure.CanvasElement, figure.CurrentPosition.Y);
+                UIElement uIElement = figure.CanvasElement;
+
+                Canvas.SetLeft(uIElement, figure.CurrentPosition.X);
+                Canvas.SetTop(uIElement, figure.CurrentPosition.Y);
             }
         }
 
@@ -264,7 +271,7 @@ namespace DesktopUI
         private void ComboboxLanguages_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> languages = GetAvailableLanguageDisplayNames();
-
+            ComboboxLanguages.ItemsSource = null;
             ComboboxLanguages.ItemsSource = languages;
             ComboboxLanguages.Text = languages[0];
         }
@@ -317,6 +324,52 @@ namespace DesktopUI
         private static string GetNodeName(string figureDisplayName, int countNumber)
         {
             return $"{ figureDisplayName }:{ countNumber }";
+        }
+
+        private void FileSave_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+
+            SaveFileDialog saveFileDialog = new();
+            saveFileDialog.InitialDirectory = @"c:\temp\";
+            saveFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                BinarySerialization.WriteToBinaryFile(saveFileDialog.FileName, figures);
+            }
+
+            timer.Start();
+        }
+
+        private void FileOpen_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+
+            OpenFileDialog openFileDialog = new();
+            openFileDialog.InitialDirectory = @"c:\temp\";
+            openFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                figures = BinarySerialization.ReadFromBinaryFile<List<AbstractFigure>>(openFileDialog.FileName);
+            }
+
+            RunNewFigures();
+
+            timer.Start();
+        }
+
+        private void RunNewFigures()
+        {
+            DrawingArea.Children.Clear();
+            BrowserTree.Items.Clear();
+
+            foreach (var figure in figures)
+            {
+                AddToCanvas(figure);
+                AddToBrowserTree(figure);
+            }
         }
     }
 }

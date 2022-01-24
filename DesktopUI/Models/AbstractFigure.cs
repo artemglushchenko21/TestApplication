@@ -5,14 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Drawing;
 
 namespace DesktopUI.Models
 {
+    [Serializable]
     public abstract class AbstractFigure
     {
         private protected double _velocityX = RandomValuesProvider.GetRandomVelocity();
         private protected double _velocityY = RandomValuesProvider.GetRandomVelocity();
         private protected PointModel _currentPosition;
+        private protected (byte R, byte G, byte B) colorRgbValues;
+        [NonSerialized]
         private protected UIElement _canvasElement;
 
         public virtual UIElement CanvasElement
@@ -32,6 +36,8 @@ namespace DesktopUI.Models
         public abstract double VelocityX { get; }
 
         public abstract double VelocityY { get; }
+
+        protected Color Color { get; }
 
         public bool IsStoped { get; set; }
 

@@ -11,8 +11,8 @@ using DesktopUI.Resources;
 
 namespace DesktopUI.Models
 {
-
-   public class TriangleModel : AbstractFigure
+    [Serializable]
+    public class TriangleModel : AbstractFigure
     {
         private double maxHeight;
         private double maxWidth;

@@ -49,6 +49,7 @@
       <DependentUpon>AppData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializers\BinarySerialization.cs" />
     <Compile Include="Static\RandomValuesProvider.cs" />
   </ItemGroup>
   <ItemGroup>
