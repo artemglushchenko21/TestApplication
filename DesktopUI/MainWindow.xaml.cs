@@ -3,6 +3,7 @@ using DesktopUI.Resources;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -38,6 +40,17 @@ namespace DesktopUI
 
         public MainWindow()
         {
+            //Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru");
+            //Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru");
+            //FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement),
+            //    new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name)));
+
+            //        FrameworkElement.LanguageProperty.OverrideMetadata(
+            //typeof(FrameworkElement),
+            //new FrameworkPropertyMetadata(
+            //    XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag)));
+
+
             InitializeComponent();
 
             DisableMoveButton(); ;
@@ -46,13 +59,20 @@ namespace DesktopUI
             SetCanvasUpdateLoop();
         }
 
+        static MainWindow()
+        {
+
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement),
+new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name)));
+        }
+
         private static List<string> GetAvailableLanguageDisplayNames()
         {
             Dictionary<string, string> result = GetAvailableLanguagesDictionary();
             return result.Values.Select(x => x.Substring(0, 1).ToUpper() + x[1..]).ToList();
         }
 
-        private static Dictionary<string,string> GetAvailableLanguagesDictionary()
+        private static Dictionary<string, string> GetAvailableLanguagesDictionary()
         {
             Dictionary<string, string> result = new();
 
@@ -256,7 +276,7 @@ namespace DesktopUI
                 {
                     PointModel currentPosition = figure.CurrentPosition;
                     currentPosition.X = canvasMaxPoint.X - figure.MaxWidth;
-                    figure.CurrentPosition= currentPosition;
+                    figure.CurrentPosition = currentPosition;
                 }
 
                 if (figure.CurrentPosition.Y + figure.MaxHeight >= canvasMaxPoint.Y)
@@ -292,10 +312,14 @@ namespace DesktopUI
             return currentCulture;
         }
 
-        private static void SetCurrentCulture(string currentCulture)
+        private void SetCurrentCulture(string currentCulture)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(currentCulture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(currentCulture);
+
+            MenuItemFile.Header = ControlNames.File;
+            MenuItemOpen.Header = ControlNames.Open;
+            MenuItemSave.Header = ControlNames.Save;
         }
 
         private void UpdateBrowserNames()
@@ -332,11 +356,26 @@ namespace DesktopUI
 
             SaveFileDialog saveFileDialog = new();
             saveFileDialog.InitialDirectory = @"c:\temp\";
-            saveFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
+            //saveFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
+            //"JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            saveFileDialog.Filter = "Bin file|*.bin|Xml file|*.xml";
+
+            //if (saveFileDialog.ShowDialog() == true)
+            //{
+            //    BinarySerializer.WriteToBinaryFile(saveFileDialog.FileName, figures);
+            //}
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                BinarySerialization.WriteToBinaryFile(saveFileDialog.FileName, figures);
+                if (saveFileDialog.FilterIndex == 1)
+                {
+                    BinarySerializer.WriteToBinaryFile(saveFileDialog.FileName, figures);
+                }
+
+                if (saveFileDialog.FilterIndex == 2)
+                {
+                    XmlSerializer.WriteToXmlFile<List<AbstractFigure>>(saveFileDialog.FileName, figures);
+                }
             }
 
             timer.Start();
@@ -348,11 +387,26 @@ namespace DesktopUI
 
             OpenFileDialog openFileDialog = new();
             openFileDialog.InitialDirectory = @"c:\temp\";
-            openFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
+            //  openFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
+            openFileDialog.Filter = "Serializing files (*.bin; *.xml)|*.bin; *.xml|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == true)
             {
-                figures = BinarySerialization.ReadFromBinaryFile<List<AbstractFigure>>(openFileDialog.FileName);
+                string fileName = openFileDialog.FileName;
+                string fileExtenion = System.IO.Path.GetExtension(fileName);
+
+                if (fileExtenion == ".bin")
+                {
+                    figures = BinarySerializer.ReadFromBinaryFile<List<AbstractFigure>>(openFileDialog.FileName);
+                }
+                else if (fileExtenion == ".xml")
+                {
+                    figures = XmlSerializer.ReadFromXmlFile<List<AbstractFigure>>(openFileDialog.FileName);
+                }
+                else
+                {
+
+                }
             }
 
             RunNewFigures();

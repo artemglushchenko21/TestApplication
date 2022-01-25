@@ -14,9 +14,6 @@ namespace DesktopUI.Models
     [Serializable]
     public class RectangleModel : AbstractFigure
     {
-        private readonly double width = RandomValuesProvider.GetRandomSize();
-        private readonly double height = RandomValuesProvider.GetRandomSize();
-
         public RectangleModel()
         {
             CreateRectangleShape();
@@ -24,34 +21,94 @@ namespace DesktopUI.Models
 
         private void CreateRectangleShape()
         {
-            SolidColorBrush mySolidColorBrush = new();
-            mySolidColorBrush.Color = RandomValuesProvider.GetRandomColor();
+            Rectangle rectangle = new()
+            {
+                Height = Height,
+                Width = Width
+            };
 
-            colorRgbValues = (mySolidColorBrush.Color.R, mySolidColorBrush.Color.G, mySolidColorBrush.Color.B);
+            _canvasElement = rectangle;
+
+            ApplySize();
+            ApplyColor(ColorRgbValues);
+        }
+
+        private void CreateRectangularShape(double height, double width, (byte R, byte G, byte B) colorRgb)
+        {
+            SolidColorBrush brush = new();
+            brush.Color = System.Windows.Media.Color.FromRgb(colorRgb.R, colorRgb.G, colorRgb.B);
 
             Rectangle rectangle = new()
             {
                 Height = height,
                 Width = width,
-                
-                Fill = mySolidColorBrush
+
+                Fill = brush
             };
 
             _canvasElement = rectangle;
         }
 
-        private void CreateRectangularShape(double height, double width, (byte R, byte G, byte B) colorRgb)
+        private double _width;
+        public double Width
         {
-            SolidColorBrush mySolidColorBrush = new();
-            mySolidColorBrush.Color = System.Windows.Media.Color.FromRgb(colorRgb.R, colorRgb.G, colorRgb.B);
-
-            Rectangle rectangle = new()
+            get
             {
-                Height = height,
-                Width = width,
+                if (_width == 0)
+                {
+                    _width = RandomValuesProvider.GetRandomSize();
+                }
 
-                Fill = mySolidColorBrush
+                return _width;
+            }
+            set
+            {
+                _width = value;
+
+                ApplySize();
+            }
+        }
+
+        private double _height;
+        public double Height
+        {
+            get
+            {
+                if (_width == 0)
+                {
+                    _height = RandomValuesProvider.GetRandomSize();
+                }
+
+                return _height;
+            }
+            set
+            {
+                _height = value;
+
+                ApplySize();
+            }
+        }
+
+        protected override void ApplyColor((byte R, byte G, byte B) colorRgbValues)
+        {
+            Rectangle rectangle = (Rectangle)_canvasElement;
+
+            SolidColorBrush brush = new()
+            {
+                Color = System.Windows.Media.Color.FromRgb(ColorRgbValues.R, ColorRgbValues.G, ColorRgbValues.B)
             };
+
+            rectangle.Fill = brush;
+
+            _canvasElement = rectangle;
+        }
+
+        private void ApplySize()
+        {
+            Rectangle rectangle = (Rectangle)_canvasElement;
+
+            rectangle.Width = Width;
+            rectangle.Height = Height;
 
             _canvasElement = rectangle;
         }
@@ -60,31 +117,39 @@ namespace DesktopUI.Models
         {
             get
             {
-                if(_canvasElement != null)
+                if (_canvasElement != null)
                 {
                     return _canvasElement;
                 }
 
-                CreateRectangularShape(height, width, colorRgbValues);
-              //  CreateRectangleShape();
+                CreateRectangularShape(Height, Width, ColorRgbValues);
 
                 return _canvasElement;
             }
         }
 
-        public override string DisplayName 
-        { 
-            get 
-            { 
-                return GlobalStrings.RectangleDisplayName; 
-            } 
+        private string _displayName;
+        public override string DisplayName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_displayName))
+                {
+                    _displayName = GlobalStrings.RectangleDisplayName;
+                }
+                return _displayName;
+            }
+            set
+            {
+                _displayName = value;
+            }
         }
 
         public override double MaxHeight
         {
             get
             {
-                return height;
+                return Height;
             }
         }
 
@@ -92,7 +157,7 @@ namespace DesktopUI.Models
         {
             get
             {
-                return width;
+                return Width;
             }
         }
 
@@ -102,6 +167,10 @@ namespace DesktopUI.Models
             {
                 return _velocityX;
             }
+            set
+            {
+                _velocityX = value;
+            }
         }
 
         public override double VelocityY
@@ -109,6 +178,10 @@ namespace DesktopUI.Models
             get
             {
                 return _velocityY;
+            }
+            set
+            {
+                _velocityY = value;
             }
         }
 

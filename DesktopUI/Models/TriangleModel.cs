@@ -24,22 +24,93 @@ namespace DesktopUI.Models
 
         private void CreateTriangleShape()
         {
-            PointCollection pointCollection = RandomValuesProvider.GetRandomPointsForTriangle();
+            Polygon triangle = new();
+            _canvasElement = triangle;
+
+            ApplyTrianglePoints();
+            ApplyColor(ColorRgbValues);
+        }
+
+        private void ApplyTrianglePoints()
+        {
+            PointCollection pointCollection = new();
+            pointCollection.Add(TrianglePoints.pointA);
+            pointCollection.Add(TrianglePoints.pointB);
+            pointCollection.Add(TrianglePoints.pointC);
+
+            Polygon triangle = (Polygon)_canvasElement;
+            triangle.Points = pointCollection;
 
             SetTriangleMaxWidth(pointCollection);
             SetTriangleMaxHeight(pointCollection);
+        }
 
+        private void CreateTriangleShape((Point pointA, Point pointB, Point pointC) trianglePoints)
+        {
             Polygon triangle = new();
-            triangle.Points = pointCollection;
+            _canvasElement = triangle;
 
-            SolidColorBrush mySolidColorBrush = new()
+            TrianglePoints = trianglePoints;
+
+            ApplyTrianglePoints();
+
+            ApplyColor(ColorRgbValues);
+        }
+
+        private (Point pointA, Point pointB, Point pointC) _trianglePoints;
+        public (Point pointA, Point pointB, Point pointC) TrianglePoints
+        {
+            get
             {
-                Color = RandomValuesProvider.GetRandomColor()
+                if (_trianglePoints.pointA.X == 0 && _trianglePoints.pointA.Y == 0
+                    && _trianglePoints.pointB.X == 0 && _trianglePoints.pointB.Y == 0
+                   && _trianglePoints.pointC.X == 0 && _trianglePoints.pointC.Y == 0)
+                {
+                    PointCollection pointCollection = RandomValuesProvider.GetRandomPointsForTriangle();
+                    _trianglePoints.pointA = pointCollection[0];
+                    _trianglePoints.pointB = pointCollection[1];
+                    _trianglePoints.pointC = pointCollection[2];
+                }
+
+                return _trianglePoints;
+            }
+            set
+            {
+                _trianglePoints.pointA = value.pointA;
+                _trianglePoints.pointB = value.pointB;
+                _trianglePoints.pointC = value.pointC;
+
+                ApplyTrianglePoints();
+            }
+        }
+
+        protected override void ApplyColor((byte R, byte G, byte B) colorRgbValues)
+        {
+            Polygon triangle = (Polygon)_canvasElement;
+
+            SolidColorBrush brush = new()
+            {
+                Color = System.Windows.Media.Color.FromRgb(ColorRgbValues.R, ColorRgbValues.G, ColorRgbValues.B)
             };
 
-            triangle.Fill = mySolidColorBrush;
+            triangle.Fill = brush;
 
             _canvasElement = triangle;
+        }
+
+        public override UIElement CanvasElement
+        {
+            get
+            {
+                if (_canvasElement != null)
+                {
+                    return _canvasElement;
+                }
+
+                CreateTriangleShape(TrianglePoints);
+
+                return _canvasElement;
+            }
         }
 
         public override double MaxHeight
@@ -64,6 +135,10 @@ namespace DesktopUI.Models
             {
                 return _velocityX;
             }
+            set
+            {
+                _velocityX = value;
+            }
         }
 
         public override double VelocityY
@@ -71,6 +146,10 @@ namespace DesktopUI.Models
             get
             {
                 return _velocityY;
+            }
+            set
+            {
+                _velocityY = value;
             }
         }
 
@@ -87,12 +166,21 @@ namespace DesktopUI.Models
             }
         }
 
-        public override string DisplayName 
-        { 
-            get 
-            { 
-                return GlobalStrings.TriangleDisplayName; 
-            } 
+        private string _displayName;
+        public override string DisplayName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_displayName))
+                {
+                    _displayName = GlobalStrings.TriangleDisplayName;
+                }
+                return _displayName;
+            }
+            set
+            {
+                _displayName = value;
+            }
         }
 
         private void SetTriangleMaxHeight(PointCollection pointCollection)
@@ -105,10 +193,11 @@ namespace DesktopUI.Models
 
         private void SetTriangleMaxWidth(PointCollection pointCollection)
         {
-          double xMin = pointCollection.Min(point => point.X);
-          double xMax = pointCollection.Max(point => point.X);
+            double xMin = pointCollection.Min(point => point.X);
+            double xMax = pointCollection.Max(point => point.X);
 
-          maxWidth = xMax - xMin;
+            maxWidth = xMax - xMin;
         }
+
     }
 }

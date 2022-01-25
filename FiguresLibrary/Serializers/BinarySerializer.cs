@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UiLibrary.Serializers
 {
-    public class BinarySerialization
+    public class BinarySerializer
     {
         public static void WriteToBinaryFile<T>(string filePath, T objectToWrite, bool append = false)
         {

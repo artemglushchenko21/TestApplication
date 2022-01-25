@@ -120,6 +120,9 @@
   <data name="CircleDisplayName" xml:space="preserve">
     <value>Круг</value>
   </data>
+  <data name="MenuFileDisplayName" xml:space="preserve">
+    <value>Файл</value>
+  </data>
   <data name="PrefixStopped" xml:space="preserve">
     <value> (остан.)</value>
   </data>

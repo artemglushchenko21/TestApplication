@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DesktopUI.Resources {
+namespace DesktopUI.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace DesktopUI.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class GlobalStrings {
+    public class QWE {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GlobalStrings() {
+        internal QWE() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DesktopUI.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DesktopUI.Resources.GlobalStrings", typeof(GlobalStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DesktopUI.Properties.QWE", typeof(QWE).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace DesktopUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Circle.
+        ///   Looks up a localized string similar to dsdsd.
         /// </summary>
-        public static string CircleDisplayName {
+        public static string RTE {
             get {
-                return ResourceManager.GetString("CircleDisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File.
-        /// </summary>
-        public static string MenuFileDisplayName {
-            get {
-                return ResourceManager.GetString("MenuFileDisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  (stopped).
-        /// </summary>
-        public static string PrefixStopped {
-            get {
-                return ResourceManager.GetString("PrefixStopped", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rectangle.
-        /// </summary>
-        public static string RectangleDisplayName {
-            get {
-                return ResourceManager.GetString("RectangleDisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Triangle.
-        /// </summary>
-        public static string TriangleDisplayName {
-            get {
-                return ResourceManager.GetString("TriangleDisplayName", resourceCulture);
+                return ResourceManager.GetString("RTE", resourceCulture);
             }
         }
     }

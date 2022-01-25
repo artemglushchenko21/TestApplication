@@ -22,14 +22,14 @@ namespace DesktopUI.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class GlobalStrings {
+    public class ControlNames {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GlobalStrings() {
+        internal ControlNames() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DesktopUI.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DesktopUI.Resources.GlobalStrings", typeof(GlobalStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DesktopUI.Resources.ControlNames", typeof(ControlNames).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,29 @@ namespace DesktopUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Circle.
-        /// </summary>
-        public static string CircleDisplayName {
-            get {
-                return ResourceManager.GetString("CircleDisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
-        public static string MenuFileDisplayName {
+        public static string File {
             get {
-                return ResourceManager.GetString("MenuFileDisplayName", resourceCulture);
+                return ResourceManager.GetString("File", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  (stopped).
+        ///   Looks up a localized string similar to Open.
         /// </summary>
-        public static string PrefixStopped {
+        public static string Open {
             get {
-                return ResourceManager.GetString("PrefixStopped", resourceCulture);
+                return ResourceManager.GetString("Open", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rectangle.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
-        public static string RectangleDisplayName {
+        public static string Save {
             get {
-                return ResourceManager.GetString("RectangleDisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Triangle.
-        /// </summary>
-        public static string TriangleDisplayName {
-            get {
-                return ResourceManager.GetString("TriangleDisplayName", resourceCulture);
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
     }

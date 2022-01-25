@@ -120,6 +120,9 @@
   <data name="CircleDisplayName" xml:space="preserve">
     <value>Circle</value>
   </data>
+  <data name="MenuFileDisplayName" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="PrefixStopped" xml:space="preserve">
     <value> (stopped)</value>
   </data>

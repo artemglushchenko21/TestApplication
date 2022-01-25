@@ -6,16 +6,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace DesktopUI.Models
 {
+    [XmlInclude(typeof(CircleModel))]
+    [XmlInclude(typeof(RectangleModel))]
+    [XmlInclude(typeof(TriangleModel))]
     [Serializable]
     public abstract class AbstractFigure
     {
         private protected double _velocityX = RandomValuesProvider.GetRandomVelocity();
         private protected double _velocityY = RandomValuesProvider.GetRandomVelocity();
         private protected PointModel _currentPosition;
-        private protected (byte R, byte G, byte B) colorRgbValues;
+        protected abstract void ApplyColor((byte R, byte G, byte B) colorRgbValues);
+
+        protected (byte R, byte G, byte B) _colorRgbValues;
+        public virtual (byte R, byte G, byte B) ColorRgbValues 
+        {
+            get
+            {
+                if (_colorRgbValues.R == 0 && _colorRgbValues.G == 0 && _colorRgbValues.B == 0)
+                {
+                    var color = RandomValuesProvider.GetRandomColor();
+
+                    _colorRgbValues = (color.R, color.G, color.B);
+                }
+                return _colorRgbValues;
+            }
+            set
+            {
+                _colorRgbValues.R = value.R;
+                _colorRgbValues.G = value.G;
+                _colorRgbValues.B = value.B;
+
+                ApplyColor(_colorRgbValues);
+            }
+        }
+
         [NonSerialized]
         private protected UIElement _canvasElement;
 
@@ -27,15 +55,15 @@ namespace DesktopUI.Models
             }
         }
 
-        public abstract string DisplayName { get; }
+        public abstract string DisplayName { get; set; }
 
         public abstract double MaxHeight { get; }
 
         public abstract double MaxWidth { get; }
 
-        public abstract double VelocityX { get; }
+        public abstract double VelocityX { get; set; }
 
-        public abstract double VelocityY { get; }
+        public abstract double VelocityY { get; set; }
 
         protected Color Color { get; }
 
