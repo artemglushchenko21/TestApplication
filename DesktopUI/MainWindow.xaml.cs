@@ -1,5 +1,5 @@
-﻿using DesktopUI.Models;
-using DesktopUI.Resources;
+﻿using UiLibrary.Models;
+using UiLibrary.Resources;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -21,9 +21,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using UiLibrary.Serializers;
-using PointModel = DesktopUI.Models.PointModel;
+using PointModel = UiLibrary.Models.PointModel;
 
-namespace DesktopUI
+namespace UiLibrary
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -317,9 +317,9 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(currentCulture);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(currentCulture);
 
-            MenuItemFile.Header = ControlNames.File;
-            MenuItemOpen.Header = ControlNames.Open;
-            MenuItemSave.Header = ControlNames.Save;
+            MenuItemFile.Header = ControlDisplayNames.File;
+            MenuItemOpen.Header = ControlDisplayNames.Open;
+            MenuItemSave.Header = ControlDisplayNames.Save;
         }
 
         private void UpdateBrowserNames()
@@ -356,14 +356,8 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
 
             SaveFileDialog saveFileDialog = new();
             saveFileDialog.InitialDirectory = @"c:\temp\";
-            //saveFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
-            //"JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
-            saveFileDialog.Filter = "Bin file|*.bin|Xml file|*.xml";
 
-            //if (saveFileDialog.ShowDialog() == true)
-            //{
-            //    BinarySerializer.WriteToBinaryFile(saveFileDialog.FileName, figures);
-            //}
+            saveFileDialog.Filter = "Bin file|*.bin|Xml file|*.xml|Json file|*.json";
 
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -372,9 +366,14 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
                     BinarySerializer.WriteToBinaryFile(saveFileDialog.FileName, figures);
                 }
 
-                if (saveFileDialog.FilterIndex == 2)
+                else if (saveFileDialog.FilterIndex == 2)
                 {
-                    XmlSerializer.WriteToXmlFile<List<AbstractFigure>>(saveFileDialog.FileName, figures);
+                    XmlSerializer.WriteToXmlFile(saveFileDialog.FileName, figures);
+                }
+
+                else if (saveFileDialog.FilterIndex == 3)
+                {
+                    JsonSerializer.WriteToJsonFile(saveFileDialog.FileName, figures);
                 }
             }
 
@@ -387,8 +386,7 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
 
             OpenFileDialog openFileDialog = new();
             openFileDialog.InitialDirectory = @"c:\temp\";
-            //  openFileDialog.Filter = "bin files (*.bin)|*.bin|All files (*.*)|*.*";
-            openFileDialog.Filter = "Serializing files (*.bin; *.xml)|*.bin; *.xml|All files (*.*)|*.*";
+            openFileDialog.Filter = "Serializing files (*.bin; *.xml; *.json)|*.bin; *.xml; *.json|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -402,6 +400,10 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
                 else if (fileExtenion == ".xml")
                 {
                     figures = XmlSerializer.ReadFromXmlFile<List<AbstractFigure>>(openFileDialog.FileName);
+                }
+                else if (fileExtenion == ".json")
+                {
+                    figures = JsonSerializer.ReadFromJsonFile<List<AbstractFigure>>(openFileDialog.FileName);
                 }
                 else
                 {

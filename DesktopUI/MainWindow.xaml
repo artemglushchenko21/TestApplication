@@ -1,10 +1,10 @@
-﻿<Window x:Class="DesktopUI.MainWindow"
+﻿<Window x:Class="UiLibrary.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesktopUI"
-        xmlns:resx="clr-namespace:DesktopUI.Resources"
+        xmlns:local="clr-namespace:UiLibrary"
+        xmlns:resx="clr-namespace:UiLibrary.Resources;assembly=UiLibrary"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
@@ -37,9 +37,9 @@
         </Grid>
         <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="#d4d6d9">
             <Menu DockPanel.Dock="Top">
-                <MenuItem x:Name="MenuItemFile" Header="{x:Static resx:ControlNames.File}">
-                    <MenuItem x:Name="MenuItemOpen" Header="{x:Static resx:ControlNames.Open}" Click="FileOpen_Click" />
-                    <MenuItem x:Name="MenuItemSave" Header="{x:Static resx:ControlNames.Save}" Click="FileSave_Click"/>
+                <MenuItem x:Name="MenuItemFile" Header="{x:Static resx:ControlDisplayNames.File}">
+                    <MenuItem x:Name="MenuItemOpen" Header="{x:Static resx:ControlDisplayNames.Open}" Click="FileOpen_Click" />
+                    <MenuItem x:Name="MenuItemSave" Header="{x:Static resx:ControlDisplayNames.Save}" Click="FileSave_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

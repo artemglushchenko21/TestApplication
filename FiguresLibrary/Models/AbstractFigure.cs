@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.Windows.Media;
 
-namespace DesktopUI.Models
+namespace UiLibrary.Models
 {
     [XmlInclude(typeof(CircleModel))]
     [XmlInclude(typeof(RectangleModel))]
@@ -22,7 +23,7 @@ namespace DesktopUI.Models
         protected abstract void ApplyColor((byte R, byte G, byte B) colorRgbValues);
 
         protected (byte R, byte G, byte B) _colorRgbValues;
-        public virtual (byte R, byte G, byte B) ColorRgbValues 
+        public virtual (byte R, byte G, byte B) ColorRgbValues
         {
             get
             {
@@ -49,9 +50,9 @@ namespace DesktopUI.Models
 
         public virtual UIElement CanvasElement
         {
-            get 
-            { 
-                return _canvasElement; 
+            get
+            {
+                return _canvasElement;
             }
         }
 
@@ -65,13 +66,11 @@ namespace DesktopUI.Models
 
         public abstract double VelocityY { get; set; }
 
-        protected Color Color { get; }
-
         public bool IsStoped { get; set; }
 
         public abstract PointModel CurrentPosition { get; set; }
 
-        public virtual void Move(PointModel maxPoint) 
+        public virtual void Move(PointModel maxPoint)
         {
             if (IsStoped)
             {

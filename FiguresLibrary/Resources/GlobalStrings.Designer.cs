@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DesktopUI.Resources {
+namespace UiLibrary.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DesktopUI.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DesktopUI.Resources.GlobalStrings", typeof(GlobalStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UiLibrary.Resources.GlobalStrings", typeof(GlobalStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,7 +79,7 @@ namespace DesktopUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  (stopped).
+        ///   Looks up a localized string similar to (stopped).
         /// </summary>
         public static string PrefixStopped {
             get {

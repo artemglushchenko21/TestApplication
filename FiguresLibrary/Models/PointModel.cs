@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesktopUI.Models
+namespace UiLibrary.Models
 {
     [Serializable]
     public struct PointModel
@@ -20,7 +20,7 @@ namespace DesktopUI.Models
 
         public static PointModel GetRandomPoint(double maxX, double maxY)
         {
-            Random random = new();
+            Random random = new Random();
 
             double posX = random.NextDouble() * maxX;
             double posY = random.NextDouble() * maxY;

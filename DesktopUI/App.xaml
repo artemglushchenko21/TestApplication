@@ -1,7 +1,7 @@
-﻿<Application x:Class="DesktopUI.App"
+﻿<Application x:Class="UiLibrary.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DesktopUI"
+             xmlns:local="clr-namespace:UiLibrary"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

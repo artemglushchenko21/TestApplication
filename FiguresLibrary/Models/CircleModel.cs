@@ -1,17 +1,20 @@
-﻿using DesktopUI.Resources;
+﻿using UiLibrary.Resources;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+//using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using UiLibrary.Static;
 
-namespace DesktopUI.Models
+namespace UiLibrary.Models
 {
     [Serializable]
+ 
     public class CircleModel : AbstractFigure
     {
         public CircleModel()
@@ -21,7 +24,7 @@ namespace DesktopUI.Models
 
         private void CreateCircleShape()
         {
-            Ellipse ellipse = new();
+            Ellipse ellipse = new Ellipse();
 
             _canvasElement = ellipse;
 
@@ -30,6 +33,7 @@ namespace DesktopUI.Models
         }
 
         private double _radius;
+
         public double Radius 
         {
             get
@@ -60,9 +64,9 @@ namespace DesktopUI.Models
 
         private void CreateCircularShape(double radius, (byte R, byte G, byte B) colorRgb)
         {
-            Ellipse ellipse = new();
+            Ellipse ellipse = new Ellipse();
 
-            SolidColorBrush mySolidColorBrush = new()
+            SolidColorBrush mySolidColorBrush = new SolidColorBrush()
             {
                 Color = System.Windows.Media.Color.FromRgb(colorRgb.R, colorRgb.G, colorRgb.B)
             };
@@ -75,12 +79,11 @@ namespace DesktopUI.Models
 
             _canvasElement = ellipse;
         }
-
         protected override void ApplyColor((byte R, byte G, byte B) colorRgbValues)
         {
             Ellipse ellipse = (Ellipse)_canvasElement;
 
-            SolidColorBrush brush = new()
+            SolidColorBrush brush = new SolidColorBrush()
             {
                 Color = System.Windows.Media.Color.FromRgb(ColorRgbValues.R, ColorRgbValues.G, ColorRgbValues.B)
             };
@@ -90,6 +93,7 @@ namespace DesktopUI.Models
             _canvasElement = ellipse;
         }
 
+        [JsonIgnore]
         public override UIElement CanvasElement
         {
             get
@@ -104,7 +108,7 @@ namespace DesktopUI.Models
                 return _canvasElement;
             }
         }
-
+  
         public override double MaxHeight
         {
             get
@@ -120,7 +124,7 @@ namespace DesktopUI.Models
                 return Radius;
             }
         }
-
+      
         public override double VelocityX
         {
             get
@@ -132,7 +136,7 @@ namespace DesktopUI.Models
                 _velocityX = value;
             }
         }
-
+   
         public override double VelocityY
         {
             get
@@ -144,7 +148,7 @@ namespace DesktopUI.Models
                 _velocityY = value;
             }
         }
-
+  
         public override PointModel CurrentPosition
         {
             get
@@ -157,7 +161,7 @@ namespace DesktopUI.Models
                 _currentPosition = value;
             }
         }
-
+   
         private string _displayName;
         public override string DisplayName
         {

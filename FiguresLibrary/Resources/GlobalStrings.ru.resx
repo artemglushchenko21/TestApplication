@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CircleDisplayName" xml:space="preserve">
-    <value>Circle</value>
+    <value>Круг</value>
   </data>
   <data name="MenuFileDisplayName" xml:space="preserve">
-    <value>File</value>
+    <value>Файл</value>
   </data>
   <data name="PrefixStopped" xml:space="preserve">
-    <value> (stopped)</value>
+    <value>(остан.)</value>
   </data>
   <data name="RectangleDisplayName" xml:space="preserve">
-    <value>Rectangle</value>
+    <value>Прямоугольник</value>
   </data>
   <data name="TriangleDisplayName" xml:space="preserve">
-    <value>Triangle</value>
+    <value>Треугольник</value>
   </data>
 </root>

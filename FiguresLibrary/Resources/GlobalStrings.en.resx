@@ -124,7 +124,7 @@
     <value>File</value>
   </data>
   <data name="PrefixStopped" xml:space="preserve">
-    <value> (stopped)</value>
+    <value>(stopped)</value>
   </data>
   <data name="RectangleDisplayName" xml:space="preserve">
     <value>Rectangle</value>

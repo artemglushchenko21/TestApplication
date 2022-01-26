@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using DesktopUI.Resources;
+using UiLibrary.Resources;
+using Newtonsoft.Json;
 
-namespace DesktopUI.Models
+namespace UiLibrary.Models
 {
     [Serializable]
     public class RectangleModel : AbstractFigure
@@ -21,7 +22,7 @@ namespace DesktopUI.Models
 
         private void CreateRectangleShape()
         {
-            Rectangle rectangle = new()
+            Rectangle rectangle = new Rectangle()
             {
                 Height = Height,
                 Width = Width
@@ -35,10 +36,12 @@ namespace DesktopUI.Models
 
         private void CreateRectangularShape(double height, double width, (byte R, byte G, byte B) colorRgb)
         {
-            SolidColorBrush brush = new();
-            brush.Color = System.Windows.Media.Color.FromRgb(colorRgb.R, colorRgb.G, colorRgb.B);
+            SolidColorBrush brush = new SolidColorBrush
+            {
+                Color = Color.FromRgb(colorRgb.R, colorRgb.G, colorRgb.B)
+            };
 
-            Rectangle rectangle = new()
+            Rectangle rectangle = new Rectangle()
             {
                 Height = height,
                 Width = width,
@@ -93,7 +96,7 @@ namespace DesktopUI.Models
         {
             Rectangle rectangle = (Rectangle)_canvasElement;
 
-            SolidColorBrush brush = new()
+            SolidColorBrush brush = new SolidColorBrush()
             {
                 Color = System.Windows.Media.Color.FromRgb(ColorRgbValues.R, ColorRgbValues.G, ColorRgbValues.B)
             };
@@ -113,6 +116,7 @@ namespace DesktopUI.Models
             _canvasElement = rectangle;
         }
 
+        [JsonIgnore]
         public override UIElement CanvasElement
         {
             get

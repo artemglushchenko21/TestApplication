@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using DesktopUI.Resources;
+using UiLibrary.Resources;
+using Newtonsoft.Json;
 
-namespace DesktopUI.Models
+namespace UiLibrary.Models
 {
     [Serializable]
     public class TriangleModel : AbstractFigure
@@ -24,7 +25,7 @@ namespace DesktopUI.Models
 
         private void CreateTriangleShape()
         {
-            Polygon triangle = new();
+            Polygon triangle = new Polygon();
             _canvasElement = triangle;
 
             ApplyTrianglePoints();
@@ -33,10 +34,12 @@ namespace DesktopUI.Models
 
         private void ApplyTrianglePoints()
         {
-            PointCollection pointCollection = new();
-            pointCollection.Add(TrianglePoints.pointA);
-            pointCollection.Add(TrianglePoints.pointB);
-            pointCollection.Add(TrianglePoints.pointC);
+            PointCollection pointCollection = new PointCollection
+            {
+                TrianglePoints.pointA,
+                TrianglePoints.pointB,
+                TrianglePoints.pointC
+            };
 
             Polygon triangle = (Polygon)_canvasElement;
             triangle.Points = pointCollection;
@@ -47,7 +50,7 @@ namespace DesktopUI.Models
 
         private void CreateTriangleShape((Point pointA, Point pointB, Point pointC) trianglePoints)
         {
-            Polygon triangle = new();
+            Polygon triangle = new Polygon();
             _canvasElement = triangle;
 
             TrianglePoints = trianglePoints;
@@ -88,7 +91,7 @@ namespace DesktopUI.Models
         {
             Polygon triangle = (Polygon)_canvasElement;
 
-            SolidColorBrush brush = new()
+            SolidColorBrush brush = new SolidColorBrush()
             {
                 Color = System.Windows.Media.Color.FromRgb(ColorRgbValues.R, ColorRgbValues.G, ColorRgbValues.B)
             };
@@ -98,6 +101,7 @@ namespace DesktopUI.Models
             _canvasElement = triangle;
         }
 
+        [JsonIgnore]
         public override UIElement CanvasElement
         {
             get

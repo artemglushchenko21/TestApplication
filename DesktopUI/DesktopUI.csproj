@@ -7,26 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FiguresLibrary\UiLibrary.csproj" />
-    <ProjectReference Include="..\WpfThemes\WpfThemes.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\ControlNames.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ControlNames.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\GlobalStrings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>GlobalStrings.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Languages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Languages.resx</DependentUpon>
-    </Compile>
+    <ProjectReference Include="..\FiguresLibrary\UiLibrary.csproj" />
+    <ProjectReference Include="..\WpfThemes\WpfThemes.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,32 +23,6 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ControlNames.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ControlNames.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlNames.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ControlNames.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\GlobalStrings.resx">
-      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\GlobalStrings.ru.resx">
-      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\GlobalStrings.en.resx">
-      <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Languages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

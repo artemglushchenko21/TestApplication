@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DesktopUI.Properties {
+namespace UiLibrary.Properties {
     using System;
     
     
