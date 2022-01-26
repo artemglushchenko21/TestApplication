@@ -93,7 +93,7 @@
     <Compile Include="Serializers\FiguresJsonConverter.cs" />
     <Compile Include="Serializers\JsonSerializer.cs" />
     <Compile Include="Serializers\XmlSerializer.cs" />
-    <Compile Include="Static\RandomValuesProvider.cs" />
+    <Compile Include="Services\RandomValuesProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">

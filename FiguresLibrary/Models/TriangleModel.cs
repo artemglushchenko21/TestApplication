@@ -177,14 +177,25 @@ namespace UiLibrary.Models
             {
                 if (string.IsNullOrEmpty(_displayName))
                 {
+                    _displayName = GetDeafaultDisplayName();
+                }
+
+                if (_displayName != GlobalStrings.TriangleDisplayName)
+                {
                     _displayName = GlobalStrings.TriangleDisplayName;
                 }
+
                 return _displayName;
             }
             set
             {
                 _displayName = value;
             }
+        }
+
+        private string GetDeafaultDisplayName()
+        {
+            return GlobalStrings.TriangleDisplayName;
         }
 
         private void SetTriangleMaxHeight(PointCollection pointCollection)

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -169,14 +168,25 @@ namespace UiLibrary.Models
             {
                 if (string.IsNullOrEmpty(_displayName))
                 {
-                    _displayName = GlobalStrings.CircleDisplayName;              
+                    _displayName = GetDeafaultDisplayName();
                 }
+
+                if (_displayName != GlobalStrings.CircleDisplayName)
+                {
+                    _displayName = GlobalStrings.CircleDisplayName;
+                }
+
                 return _displayName;
             }
             set
             {
                 _displayName = value;
             }
+        }
+
+        private string GetDeafaultDisplayName()
+        {
+            return GlobalStrings.CircleDisplayName;
         }
     }
 }

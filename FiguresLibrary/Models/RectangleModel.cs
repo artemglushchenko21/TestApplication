@@ -139,14 +139,25 @@ namespace UiLibrary.Models
             {
                 if (string.IsNullOrEmpty(_displayName))
                 {
+                    _displayName = GetDeafaultDisplayName();
+                }
+
+                if (_displayName != GlobalStrings.RectangleDisplayName)
+                {
                     _displayName = GlobalStrings.RectangleDisplayName;
                 }
+
                 return _displayName;
             }
             set
             {
                 _displayName = value;
             }
+        }
+
+        private string GetDeafaultDisplayName()
+        {
+            return GlobalStrings.RectangleDisplayName;
         }
 
         public override double MaxHeight

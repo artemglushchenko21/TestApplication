@@ -120,6 +120,8 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
 
         private void ProcessAddFigure(AbstractFigure figure)
         {
+            if (figure == null) return;
+
             AddToFigures(figure);
             AddToCanvas(figure);
             AddToBrowserTree(figure);
@@ -314,8 +316,8 @@ new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture
 
         private void SetCurrentCulture(string currentCulture)
         {
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(currentCulture);
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(currentCulture);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(currentCulture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(currentCulture);
 
             MenuItemFile.Header = ControlDisplayNames.File;
             MenuItemOpen.Header = ControlDisplayNames.Open;
